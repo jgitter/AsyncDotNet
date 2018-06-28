@@ -1,0 +1,30 @@
+﻿<Window x:Class="AsyncDeadlocks.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AsyncDeadlocks"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="225" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Margin="5">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Bttn1" HorizontalAlignment="Left" Margin="0,0,5,5" Width="320" Click="Bttn1_Click" Foreground="Red">Run Synchronous Method - WILL DEADLOCK!</Button>
+                <Button x:Name="Bttn2" HorizontalAlignment="Left" Margin="0,0,5,5" Width="320" Click="Bttn2_Click">Async All The Way Down</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Bttn3" HorizontalAlignment="Left" Margin="0,0,5,5" Width="320" Click="Bttn3_Click">Run Synchronous Method On New Thread</Button>
+                <Button x:Name="Bttn4" HorizontalAlignment="Left" Margin="0,0,5,5" Width="320" Click="Bttn4_Click">Run Synchronous With No Context Capturing</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Bttn5" HorizontalAlignment="Left" Margin="0,0,5,5" Width="320" Click="Bttn5_Click">&lt;("&lt;)  Do the Stephen Cleary Shuffle (Nito.AsyncEx)  (&gt;")&gt;</Button>
+                <Button x:Name="Bttn6" HorizontalAlignment="Left" Margin="0,0,5,5" Width="320" Click="Bttn6_Click">Run Synchronous Method Inside Context-Free Zone</Button>
+            </StackPanel>
+            <TextBlock FontSize="24" HorizontalAlignment="Left" x:Name="StatusBlock"/>
+        </StackPanel>
+    </Grid>
+</Window>
