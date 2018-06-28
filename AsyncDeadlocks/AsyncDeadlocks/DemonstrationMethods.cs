@@ -26,7 +26,15 @@ namespace AsyncDeadlocks
          */
         internal static async Task<int> WrapSynchronousInAsynchronousMethod(CancellationToken token)
         {
-            return await Task.Run(() => FullySynchronousMethod(), token);
+            return await Task.Run(() =>
+            {
+                if (token.IsCancellationRequested)
+                {
+                    return default(int);
+                }
+
+                return DoWork().Result;
+            }, token);
         }
 
         /*
