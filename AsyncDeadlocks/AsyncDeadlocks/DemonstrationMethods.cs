@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Nito.AsyncEx;
 
@@ -23,9 +24,9 @@ namespace AsyncDeadlocks
          * This method prevents the deadlock by moving the call into a ThreadPool thread which does not have a synchronization context to
          * be deadlocked.  This may seem like the perfect trivial answer for UI and ASP.NET, but threads are expensive.  Use with care.
          */
-        internal static async Task<int> WrapSynchronousInAsynchronousMethod()
+        internal static async Task<int> WrapSynchronousInAsynchronousMethod(CancellationToken token)
         {
-            return await Task.Run(() => FullySynchronousMethod());
+            return await Task.Run(() => FullySynchronousMethod(), token);
         }
 
         /*

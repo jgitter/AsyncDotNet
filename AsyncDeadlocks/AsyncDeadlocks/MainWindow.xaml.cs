@@ -33,7 +33,9 @@ namespace AsyncDeadlocks
 
         private async void Bttn3_Click(object sender, RoutedEventArgs e)
         {
-            await DemonstrationMethods.WrapSynchronousInAsynchronousMethod();
+            var cancelSource = new CancellationTokenSource(TimeSpan.FromSeconds(1));
+            Task t = DemonstrationMethods.WrapSynchronousInAsynchronousMethod(cancelSource.Token);
+
             StatusBlock.Text = "Finished - Synchronous on separate thread";
         }
 
